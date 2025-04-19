@@ -50,7 +50,7 @@ export default async function checkOutCart() {
         referalCoins: true
       }
     })
-    console.log(userCart)
+    console.log(userCart,"user cart",user.user._id)
 
     if (!userCart || userCart.cartItem.length === 0) {
       return { success: false, message: "Cart is empty" }

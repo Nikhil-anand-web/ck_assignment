@@ -17,7 +17,7 @@ export default async function decreaseVarientInCart({ varientId }) {
             where: {
                 AND: [{
                     cart: {
-                        userId: user.id
+                        userId: user.user._id
                     }
                 }, { varientId: varientId }]
             }, select: {

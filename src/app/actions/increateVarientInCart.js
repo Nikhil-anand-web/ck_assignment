@@ -12,11 +12,12 @@ export default async function increateVarientInCart({ varientId }) {
 
     }
     try {
+        
         const cartItem = await db.cartItem.findFirst({
             where: {
                 AND: [{
                     cart: {
-                        userId: user.id
+                        userId: user.user._id
                     }
                 }, { varientId: varientId }]
             }, select: {
@@ -42,7 +43,7 @@ export default async function increateVarientInCart({ varientId }) {
         } else {
         
             const cart = await db.cart.findFirst({
-                where: { userId: user.id },
+                where: { userId: user.user._id },
                 select: { id: true }
             })
 
