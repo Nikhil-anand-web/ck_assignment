@@ -21,7 +21,7 @@ export default async function getNoOfVarient(varid) {
             where: {
                 AND: [{
                     cart: {
-                        userId: user.id
+                        userId: user.user._id
                     }
                 }, { varientId: varid }]
             }, select: {
