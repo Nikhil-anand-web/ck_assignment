@@ -14,7 +14,7 @@ const page = async () => {
         where: {
             AND: [{
                 cart: {
-                    userId: user.id
+                    userId: user.user._id
                 }
             }]
         }, select: {
