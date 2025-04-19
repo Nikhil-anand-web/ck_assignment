@@ -1,6 +1,6 @@
 import Pagination from '@/components/global/Pagination'
 import React from 'react'
-
+export const dynamic = 'force-dynamic';
 import db from '@/utils/db'
 import ProductCard from '../_components/ProductModel';
 

@@ -3,7 +3,7 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/options"
 import db from "@/utils/db"
 import { getServerSession } from "next-auth"
 
-
+export const dynamic = 'force-dynamic';
 const page =  async() => {
     const user = await getServerSession(authOptions)
     if (!user || user.user.role ===3) {

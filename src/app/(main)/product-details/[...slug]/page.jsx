@@ -1,7 +1,7 @@
 import db from '@/utils/db'
 import React from 'react'
 import ProductDetails from '../_components/ProductDetails'
-
+export const dynamic = 'force-dynamic';
 const page = async ({ params }) => {
   const slug = (await params).slug
   const prod = await db.product.findFirst({

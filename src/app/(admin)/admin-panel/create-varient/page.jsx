@@ -1,7 +1,7 @@
 import React from 'react'
 import VarientForm from './_components/VarientForm'
 import db from '@/utils/db'
-
+export const dynamic = 'force-dynamic';
 const page = async () => {
     const res = await db.product.findMany({
         select: {
