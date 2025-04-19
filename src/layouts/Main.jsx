@@ -6,7 +6,7 @@ import React from 'react'
 const Main = ({ children }) => {
   return (
     <>
-      <Typer />
+    
       <div className="flex flex-col min-h-screen">
         <NavbarClient />
 
