@@ -4,9 +4,11 @@ import getNoOfVarient from '@/app/actions/getNoOfVarient'
 import increateVarientInCart from '@/app/actions/increateVarientInCart'
 import React, { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
+import { useSWRConfig } from 'swr'
 
 const AddToCart = ({ varientId, initialQty = 0, refresher = null }) => {
     const [quantity, setQuantity] = useState(initialQty)
+    const { mutate } = useSWRConfig()
 
 
     useEffect(() => {
@@ -29,6 +31,8 @@ const AddToCart = ({ varientId, initialQty = 0, refresher = null }) => {
             }
             if (!res.success) throw res
             setQuantity(prev => prev + 1)
+            mutate('/action/getCartCount')
+            
         } catch (error) {
             toast.warning(error.message || "Failed to increase quantity")
         }
@@ -46,6 +50,7 @@ const AddToCart = ({ varientId, initialQty = 0, refresher = null }) => {
             }
             if (!res.success) throw res
             setQuantity(prev => prev - 1)
+            mutate('/action/getCartCount')
         } catch (error) {
             toast.warning(error.message || "Failed to decrease quantity")
         }

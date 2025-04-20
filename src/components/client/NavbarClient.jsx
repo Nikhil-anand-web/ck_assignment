@@ -15,12 +15,13 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import debounce from "@/utils/debounce";
 import getQueryResult from "@/app/actions/getQueryResult";
+import CartCount from "./CartCount";
 
 export default function NavbarClient() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
   const [query, setQuery] = useState("");
-  const [filteredResults,setFilteredResult] = useState([])
+  const [filteredResults, setFilteredResult] = useState([])
 
   const rtr = useRouter();
   const { data: session } = useSession();
@@ -29,32 +30,34 @@ export default function NavbarClient() {
   const fetchResults = useCallback(
     debounce(async (searchQuery) => {
 
-        try {
-            const response = await getQueryResult(searchQuery)
-            console.log(response)
-            setFilteredResult(response.products)
+      try {
+        const response = await getQueryResult(searchQuery)
+        console.log(response)
+        setFilteredResult(response.products)
 
-        } catch (error) {
-            console.error('Error fetching data:', error);
-        }
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
 
     }, 500),
     []
-);
-useEffect(() => {
+  );
+  useEffect(() => {
     const helper = () => {
-        fetchResults(query)
+      fetchResults(query)
     }
     helper()
-}, [query])
+  }, [query])
 
-  
+
 
   return (
+
     <header className="w-full border-b shadow-sm bg-[#ffffff] sticky top-0 z-50">
       <div className="flex items-center justify-between px-6 py-4 max-w-7xl mx-auto">
         {/* Logo */}
         <div className="text-xl font-bold text-primary">My App</div>
+       
 
         {/* Nav links (Desktop) */}
         <nav className="hidden md:flex items-center gap-6 text-sm text-muted-foreground">
@@ -70,11 +73,15 @@ useEffect(() => {
           </Button>
 
           {/* Cart Button */}
-          <Link href="/cart">
+          <Link href="/cart" className="relative">
             <Button variant="ghost" size="icon" aria-label="Cart">
               <ShoppingCart className="w-5 h-5" />
+              <div className="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center">
+                <CartCount />
+              </div>
             </Button>
           </Link>
+
 
           {/* Profile Dropdown */}
           <DropdownMenu>
@@ -94,7 +101,7 @@ useEffect(() => {
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
-              {user && user.role!==3 &&  <DropdownMenuItem onClick={() => rtr.push('/admin-panel')}>Admin Panel</DropdownMenuItem>}
+              {user && user.role !== 3 && <DropdownMenuItem onClick={() => rtr.push('/admin-panel')}>Admin Panel</DropdownMenuItem>}
               {user && <DropdownMenuItem onClick={() => rtr.push("/account")}>Profile</DropdownMenuItem>}
               {user ? (
                 <DropdownMenuItem onClick={() => signOut()}>Logout</DropdownMenuItem>
@@ -129,7 +136,7 @@ useEffect(() => {
           {filteredResults.length > 0 && (
             <div className="mt-2 space-y-2">
               {filteredResults.map((item, idx) => (
-               <Link key={item.id} href={`/product-details/${item.slug}`}> <div  className="flex items-center gap-2 border p-2 rounded hover:bg-gray-50 cursor-pointer">
+                <Link key={item.id} href={`/product-details/${item.slug}`}> <div className="flex items-center gap-2 border p-2 rounded hover:bg-gray-50 cursor-pointer">
                   <Image
                     src={item.thumbNail}
                     alt={item.name}

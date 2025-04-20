@@ -8,13 +8,13 @@ export const dynamic = 'force-dynamic';
 export default function Home() {
   return <div>
     <Main>
-      <CaroClient/>
+      <CaroClient />
+
+     
 
 
-   
 
-
-      <CategoryModalGalary/>
+      <CategoryModalGalary />
 
 
     </Main>
