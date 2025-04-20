@@ -43,7 +43,11 @@ const page = async ({ params }) => {
             },
         },
     });
-console.log(catSlug,"dcfwdc")
+console.log(products,"dcfwdc")
+if (!products) {
+    return <h1> no product found</h1>
+    
+}
 
     const count = await db.product.count({
         where: {
