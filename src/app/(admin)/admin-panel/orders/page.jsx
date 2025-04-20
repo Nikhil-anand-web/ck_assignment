@@ -14,6 +14,9 @@ const page =  async() => {
         where:{
           AND:[{paymentStatus:1}]
         },
+        orderBy: {
+          createdAt: 'desc' // or 'asc' if you want oldest first
+        }
        
     })
     

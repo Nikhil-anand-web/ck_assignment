@@ -7,11 +7,16 @@ export const dynamic = 'force-dynamic';
 const page =  async() => {
     const user = await getServerSession(authOptions)
     const res = await db.orders.findMany({
-        where:{
-          AND:[{  customerId:user.user._id},{paymentStatus:1}]
-        },
-       
-    })
+      where: {
+        AND: [
+          { customerId: user.user._id },
+          { paymentStatus: 1 }
+        ]
+      },
+      orderBy: {
+        createdAt: 'desc' // or 'asc' if you want oldest first
+      }
+    });
     console.log(res)
   return (
     <div>
