@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-// Example: Your products array (replace this with real data or fetch from API)
 
 const VarientForm = ({products}) => {
   const [selectedProductId, setSelectedProductId] = useState("");
@@ -27,7 +26,7 @@ const VarientForm = ({products}) => {
       discount: parseFloat(form.discount.value),
       mrp: parseFloat(form.mrp.value),
     //   isDefault: form.isDefault.value === "true",
-      productId: selectedProductId,  // attach selected productId
+      productId: selectedProductId,  
     };
 
     try {

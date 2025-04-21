@@ -3,7 +3,6 @@ import React from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-// Dummy categories array – replace with actual prop or fetch
 const categories = [
   { slug: "electronics", name: "Electronics" },
   { slug: "furniture", name: "Furniture" },
@@ -16,12 +15,12 @@ const CreateProductForm = ({categories}) => {
     const form = e.target;
 
     const obj = {
-      categoryId: form.elements.category.value, // assuming slug is category ID
+      categoryId: form.elements.category.value,
       name: form.elements.name.value,
       slug: form.elements.slug.value,
       description: form.elements.description.value,
       status: form.elements.status.value === "true"?1:0,
-      thumbNail: { url: form.elements.thumbNail.value }, // mock for demo
+      thumbNail: { url: form.elements.thumbNail.value }, 
      
     };
 

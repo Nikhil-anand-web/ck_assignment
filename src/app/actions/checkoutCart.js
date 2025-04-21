@@ -17,7 +17,7 @@ export default async function checkOutCart() {
  console.log(user.user._id)
 
   try {
-    // Fetch user's cart with varients
+  
     const userCart = await db.cart.findFirst({
       where: { userId: user.user._id },
       select: {

@@ -1,24 +1,22 @@
 "use client";
 import Image from "next/image";
-import { useRouter } from "next/navigation"; // Import useRouter for client-side navigation
+import { useRouter } from "next/navigation"; 
 import React from "react";
 
 const ProductCard = ({ product }) => {
-  const router = useRouter(); // Initialize router
+  const router = useRouter(); 
   const { name, description, thumbNail, varient, slug } = product;
 
-  // Calculate discounted price
   const discountedPrice =
     varient[0].mrp - (varient[0].mrp * varient[0].discount) / 100;
 
-  // Function to handle click and navigate to product details page
   const handleClick = () => {
     router.push(`/product-details/${slug}`);
   };
 
   return (
     <div
-      onClick={handleClick} // Add the click handler to the outer div
+      onClick={handleClick} 
       className="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 w-full max-w-sm cursor-pointer"
     >
       <Image

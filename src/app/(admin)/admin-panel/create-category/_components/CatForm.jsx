@@ -90,7 +90,7 @@ const CatForm = () => {
                 </select>
             </div>
 
-            {/* Submit Button */}
+         
             <button type="submit" className="bg-[#0da487] text-white px-4 py-2 rounded">
                 Submit
             </button>

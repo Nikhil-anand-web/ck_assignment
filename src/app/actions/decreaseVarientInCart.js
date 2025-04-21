@@ -40,12 +40,12 @@ export default async function decreaseVarientInCart({ varientId }) {
         }
 
         if (cartItem.qty === 1) {
-            // If only 1 item in cart, remove it
+          
             await db.cartItem.delete({
                 where: { id: cartItem.id }
             });
         } else {
-            // Otherwise, decrement qty
+            
             await db.cartItem.update({
                 where: { id: cartItem.id },
                 data: {

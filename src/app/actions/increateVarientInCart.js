@@ -51,7 +51,7 @@ export default async function increateVarientInCart({ varientId }) {
                 throw new Error("Cart not found for user")
             }
 
-            // Step 2: Create cart item
+          
             await db.cartItem.create({
                 data: {
                     qty: 1,

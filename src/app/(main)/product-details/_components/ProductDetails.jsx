@@ -13,7 +13,7 @@ const ProductDetails = ({ product }) => {
   
     return (
       <div className="flex flex-col md:flex-row gap-8 p-6">
-        {/* Product Image */}
+
         <div className="w-full md:w-1/2 h-80 relative">
   <Image
     src={product.thumbNail}
@@ -23,12 +23,12 @@ const ProductDetails = ({ product }) => {
   />
 </div>
   
-        {/* Product Info */}
+   
         <div className="w-full md:w-1/2 space-y-4">
           <h1 className="text-3xl font-bold">{product.name}</h1>
           <p className="text-gray-600">{product.description}</p>
   
-          {/* Variant Controls */}
+      
           <div className="space-y-2">
             <h2 className="font-semibold">Choose a size:</h2>
             <div className="flex gap-3">
@@ -48,7 +48,7 @@ const ProductDetails = ({ product }) => {
             </div>
           </div>
   
-          {/* Price Section */}
+        
           <div className="space-y-1">
             <div className="text-xl font-semibold text-[#0da487]">
               ₹{finalPrice(selectedVarient.mrp, selectedVarient.discount)}
@@ -65,12 +65,9 @@ const ProductDetails = ({ product }) => {
             )}
           </div>
   
-          {/* Add to Cart / Buy Buttons */}
           <div className="flex gap-4 mt-4">
             <AddToCart varientId={selectedVarient.id}/>
-            {/* <button className="bg-white border border-[#0da487] text-[#0da487] px-6 py-2 rounded hover:bg-[#0da487] hover:text-white">
-              Buy Now
-            </button> */}
+           
           </div>
         </div>
       </div>

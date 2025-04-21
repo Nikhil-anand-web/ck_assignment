@@ -68,10 +68,10 @@ export default function NavBarAdmin() {
         </SheetContent>
       </Sheet>
 
-      {/* Center: App Name */}
+   
       <div className="text-xl font-bold text-[#0da487]">MyApp</div>
 
-      {/* Right: Profile */}
+     
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Avatar className="cursor-pointer">

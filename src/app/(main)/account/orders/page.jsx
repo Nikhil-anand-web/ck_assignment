@@ -14,7 +14,7 @@ const page =  async() => {
         ]
       },
       orderBy: {
-        createdAt: 'desc' // or 'asc' if you want oldest first
+        createdAt: 'desc' 
       }
     });
     console.log(res)

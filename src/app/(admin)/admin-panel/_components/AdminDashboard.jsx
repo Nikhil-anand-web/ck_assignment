@@ -13,11 +13,11 @@ export default function AdminDashboard() {
     categories: 0,
   });
 
-  // Simulated fetch logic (replace with actual API call)
+  
   useEffect(() => {
-    // Simulate async data fetch
+  
     const fetchData = async () => {
-      // Replace this with your API call (e.g. /api/dashboard-stats)
+     
        const res = await getDashboardNumbers()
        console.log(res)
       setData(res );
