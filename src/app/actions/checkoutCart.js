@@ -40,8 +40,7 @@ export default async function checkOutCart() {
                 },
                 mrp: true,
                 discount: true,
-                weight: true,
-                size: true
+               
               }
             }
           }
@@ -62,12 +61,12 @@ export default async function checkOutCart() {
 
     const varientIds = new Set()
     const varientMeta = []
-    let totalWeight = 0
+   
 
     userCart.cartItem.forEach(item => {
       varientIds.add(item.varient.id)
       varientMeta.push(item)
-      totalWeight += parseFloat(item.varient.weight) * item.qty
+    
     })
 
     const subTotal = totalCartValue(userCart)

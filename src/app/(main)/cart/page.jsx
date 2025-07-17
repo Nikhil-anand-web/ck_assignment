@@ -25,7 +25,7 @@ const page = async () => {
                     mrp: true,
                     id: true,
                     discount: true,
-                    size: true,
+                   
                     product: {
 
                         select: {

@@ -2,12 +2,28 @@ import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
 import { authOptions } from "@/app/api/auth/[...nextauth]/options";
 import db from "@/utils/db";
+import path from "path";
+import { saveFileToPath } from "@/utils/saveFileToPath";
 
 export async function POST(req) {
     const user = await getServerSession(authOptions);
-    const reqObj = await req.json();
-    console.log(user, reqObj)
+    const formData = await req.formData();
 
+    const file = formData.get("file"); // This is a File object
+    const name = formData.get("name");
+    const categoryId = formData.get("categoryId");
+    const slug = formData.get("slug");
+    const description = formData.get("description");
+    const pointsDescription = formData.get("pointsDescription");
+    const status = formData.get("status");
+
+
+
+    const filename = `${Date.now()}-${file.name}`;
+    const absolutePath = path.join(process.cwd(), 'asset', 'uploads','products', slug, filename);
+    await saveFileToPath(absolutePath, file);
+
+   
 
     if (user) {
 
@@ -15,16 +31,17 @@ export async function POST(req) {
 
             const res = await db.product.create({
                 data: {
-                    name: reqObj.name,
-                    description: reqObj.description,
-                    slug: reqObj.slug,
-                    thumbNail: reqObj.thumbNail.url,
-                    status: +reqObj.status===1?true:false,
+                    name: name,
+                    description: description,
+                    slug: slug,
+                    thumbNail: `/asset/uploads/products/${slug}/${filename}`,
+                    status: +status === 1 ? true : false,
                     category: {
                         connect: {
-                            id: reqObj.categoryId
+                            id: categoryId
                         }
                     },
+                    pointsDescription:pointsDescription.split(','),
                     createdBy: {
                         connect: {
                             id: user.user._id, // Must match the user's ID in your database

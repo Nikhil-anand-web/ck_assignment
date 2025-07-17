@@ -32,7 +32,7 @@ export async function POST(req) {
       CUST_ID: updatedOrder.customerId,
       INDUSTRY_TYPE_ID: process.env.NEXT_PUBLIC_PAYTM_INDUSTRY_TYPE_ID,
       CHANNEL_ID: process.env.NEXT_PUBLIC_PAYTM_CHANNEL_ID,
-      TXN_AMOUNT:process.env.APP_ENV === 'TEST' ? '1' : Math.round(updatedOrder.finalPrice).toString(),
+      TXN_AMOUNT:process.env.APP_ENV !== 'TEST' ? '1' : Math.round(updatedOrder.finalPrice).toString(),
       WEBSITE: process.env.NEXT_PUBLIC_PAYTM_WEBSITE,
       CALLBACK_URL: process.env.NEXT_PUBLIC_PAYTM_CALLBACK_URL,
       MOBILE_NO: reqObj.CustomerMeta.phone,

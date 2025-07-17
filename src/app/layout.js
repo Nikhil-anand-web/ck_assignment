@@ -2,6 +2,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import AuthProvider from "./context/AuthProvider";
 import { ToastContainer } from "react-toastify";
+import { ThemeProvider } from "@/components/theam-provider";
+import { TracingBeam } from "@/components/ui/tracing-beam";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -20,12 +22,17 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
+      
       <AuthProvider>
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
-          {children}
+          
+
+            {children}
+          
+        
           <ToastContainer
             position="bottom-right"
             autoClose={5000}

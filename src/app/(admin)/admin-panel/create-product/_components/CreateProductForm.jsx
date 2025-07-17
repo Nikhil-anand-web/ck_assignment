@@ -1,31 +1,43 @@
 "use client";
-import React from "react";
+import React, { useRef } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { Label } from "@radix-ui/react-dropdown-menu";
+import { Input } from "@/components/ui/input";
 
 const categories = [
   { slug: "electronics", name: "Electronics" },
   { slug: "furniture", name: "Furniture" },
 ];
 
-const CreateProductForm = ({categories}) => {
+const CreateProductForm = ({ categories }) => {
+  const ref = useRef(null)
   const onSubmit = async (e) => {
     e.preventDefault();
 
-    const form = e.target;
+    const formElements = e.target.elements;
 
-    const obj = {
-      categoryId: form.elements.category.value,
-      name: form.elements.name.value,
-      slug: form.elements.slug.value,
-      description: form.elements.description.value,
-      status: form.elements.status.value === "true"?1:0,
-      thumbNail: { url: form.elements.thumbNail.value }, 
-     
-    };
+    const file = ref.current?.files?.[0];
+
+    if (!file) {
+      toast.error("Please select a file");
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("categoryId", formElements.category.value);
+    formData.append("name", formElements.name.value);
+    formData.append("slug", formElements.slug.value);
+    formData.append("description", formElements.description.value);
+    formData.append("pointsDescription", formElements.pointsDescription.value);
+    formData.append("status", formElements.status.value === "true" ? "1" : "0");
+    
 
     try {
-      const res = await axios.post("/api/v1/admin/createProduct", obj);
+      const res = await axios.post("/api/v1/admin/createProduct", formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
 
       if (!res.data.success) {
         throw new Error(res.data.message);
@@ -36,6 +48,7 @@ const CreateProductForm = ({categories}) => {
       toast.error(err.message || "Something went wrong");
     }
   };
+
 
   return (
     <form onSubmit={onSubmit} className="max-w-xl space-y-4">
@@ -97,32 +110,20 @@ const CreateProductForm = ({categories}) => {
         </select>
       </div>
 
+      
       <div>
-        <label htmlFor="thumbNail" className="block font-medium mb-1">
-          Thumbnail Image URL
+        <label htmlFor="pointsDescription" className="block font-medium mb-1">
+          Points Description
         </label>
         <input
-          type="url"
-          id="thumbNail"
-          name="thumbNail"
+
+          id="pointsDescription"
+          name="pointsDescription"
           required
           className="w-full border rounded p-2"
+          placeholder="please enter csv"
         />
       </div>
-
-      {/* <div>
-        <label htmlFor="images" className="block font-medium mb-1">
-          Product Images (URL)
-        </label>
-        <input
-          type="url"
-          id="images"
-          name="images"
-          required
-          className="w-full border rounded p-2"
-        />
-      </div> */}
-
       <div>
         <label htmlFor="status" className="block font-medium mb-1">
           Status
@@ -136,6 +137,10 @@ const CreateProductForm = ({categories}) => {
           <option value="true">Active</option>
           <option value="false">Inactive</option>
         </select>
+      </div>
+      <div className="grid w-full max-w-sm items-center gap-3">
+        <Label htmlFor="picture">Picture</Label>
+        <Input ref={ref} name="pic" id="picture" type="file" />
       </div>
 
       <button type="submit" className="bg-[#0da487] text-white px-4 py-2 rounded">

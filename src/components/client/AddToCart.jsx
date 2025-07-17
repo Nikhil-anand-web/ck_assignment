@@ -59,7 +59,7 @@ const AddToCart = ({ varientId, initialQty = 0, refresher = null }) => {
     if (quantity === 0) {
         return <button
             onClick={handleIncrement}
-            className="bg-[#0da487] text-white px-6 py-2 rounded hover:opacity-90 transition"
+            className="bg-[#c4e413] text-white px-6 py-2 rounded hover:opacity-90 transition"
         >
             Add to Cart
         </button>

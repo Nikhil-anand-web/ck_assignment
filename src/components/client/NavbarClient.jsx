@@ -16,6 +16,7 @@ import Link from "next/link";
 import debounce from "@/utils/debounce";
 import getQueryResult from "@/app/actions/getQueryResult";
 import CartCount from "./CartCount";
+import { ModeToggle } from "../ui/ModeToggle";
 
 export default function NavbarClient() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -55,14 +56,16 @@ export default function NavbarClient() {
 
     <header className="w-full border-b shadow-sm bg-[#ffffff] sticky top-0 z-50">
       <div className="flex items-center justify-between px-6 py-4 max-w-7xl mx-auto">
-        {/* Logo */}
-        <div className="text-xl font-bold text-primary">My App</div>
+        {/* Logo
+        <div className="text-xl font-bold text-primary">My App</div> */}
+        {/* <ModeToggle/> */}
+        <Image alt="logo" height="50" width="100" src={"https://www.elixirdigitalmedia.com/wp-content/uploads/2021/05/logo-1.png"}/>
        
 
         {/* Nav links (Desktop) */}
         <nav className="hidden md:flex items-center gap-6 text-sm text-muted-foreground">
           <Link href="/" className="hover:text-primary transition-colors">Home</Link>
-          <Link href="/products/all" className="hover:text-primary transition-colors">Products</Link>
+          <Link href="/products/all" className="hover:text-primary transition-colors">Packages</Link>
         </nav>
 
         {/* Right side */}

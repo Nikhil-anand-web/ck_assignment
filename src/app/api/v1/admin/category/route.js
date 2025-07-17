@@ -2,34 +2,45 @@ import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
 import { authOptions } from "@/app/api/auth/[...nextauth]/options";
 import db from "@/utils/db";
+import { saveFileToPath } from "@/utils/saveFileToPath";
+import path from "path";
 
 export async function POST(req) {
     const user = await getServerSession(authOptions);
-    const reqObj = await req.json();
-    console.log(user, reqObj)
-    
+
+    const formData = await req.formData();
+console.log(formData,user)
+
 
     if (user) {
 
+
         try {
+            const file = formData.get("file");
+            const slug = formData.get("slug")
+            const filename = `${Date.now()}-${file.name}`;
+
+            const absolutePath = path.join(process.cwd(), 'asset', 'uploads','categoris', slug, filename);
+            await saveFileToPath(absolutePath, file);
+
             const res = await db.category.create({
                 data: {
-                    categoryName: reqObj.categoryName,
-                    slug: reqObj.slug,
-                    status: +reqObj.status,
-                    image: reqObj.image[0].url,
+                    categoryName: formData.get("categoryName"),
+                    slug: slug,
+                    status: +formData.get("status"),
+                    image: `/asset/uploads/categoris/${slug}/${filename}`,
                     createdBy: {
                         connect: {
-                            id: user.user._id, 
+                            id: user.user._id,
                         },
                     }
 
                 }
             })
             return NextResponse.json({
-                success:true,
-                message:"success !!",
-                data:res
+                success: true,
+                message: "success !!",
+                data: res
             })
 
 

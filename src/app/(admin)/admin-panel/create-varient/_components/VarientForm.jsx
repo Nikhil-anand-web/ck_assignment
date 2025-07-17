@@ -4,7 +4,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 
 
-const VarientForm = ({products}) => {
+const VarientForm = ({ products }) => {
   const [selectedProductId, setSelectedProductId] = useState("");
 
   const onSubmit = async (e) => {
@@ -19,26 +19,25 @@ const VarientForm = ({products}) => {
 
     const obj = {
       slug: form.slug.value,
-      weight: parseFloat(form.weight.value),
-      size: form.size.value,
-      qty: parseInt(form.qty.value),
+      name: form.name_sl.value, 
+      validity: parseInt(form.val.value), 
       status: form.status.value === "true",
       discount: parseFloat(form.discount.value),
       mrp: parseFloat(form.mrp.value),
-    //   isDefault: form.isDefault.value === "true",
-      productId: selectedProductId,  
+      isDefault: form.isDefault.value === "true",
+      productId: selectedProductId,
     };
 
     try {
       const res = await axios.post("/api/v1/admin/createVarient", obj);
 
       if (!res.data.success) {
-        throw new Error(res.data.message || "Failed to create varient");
+        throw new Error(res.data.message || "Failed to create variant");
       }
 
-      toast.success(res.data.message || "Varient created successfully");
+      toast.success(res.data.message || "Variant created successfully");
     } catch (error) {
-      toast.error(error.message || "Error creating varient");
+      toast.error(error.message || "Error creating variant");
     }
   };
 
@@ -58,7 +57,7 @@ const VarientForm = ({products}) => {
           <option value="">-- Select Product --</option>
           {products.map((product) => (
             <option key={product.id} value={product.id}>
-              {product.name} 
+              {product.name}
             </option>
           ))}
         </select>
@@ -78,42 +77,36 @@ const VarientForm = ({products}) => {
           className="w-full border rounded p-2"
         />
       </div>
-
       <div>
-        <label htmlFor="weight" className="block font-medium mb-1">Weight (kg)</label>
-        <input
-          type="number"
-          id="weight"
-          name="weight"
-          required
-          step="0.01"
-          className="w-full border rounded p-2"
-        />
-      </div>
-
-      <div>
-        <label htmlFor="size" className="block font-medium mb-1">Size</label>
+        <label htmlFor="name_sl" className="block font-medium mb-1">Name</label>
         <input
           type="text"
-          id="size"
-          name="size"
+          id="name_sl"
+          name="name_sl"
           required
-          placeholder="e.g. Small, Medium, Large"
+
+
+          placeholder="e.g. variant-small-1kg"
+          className="w-full border rounded p-2"
+        />
+      </div>
+      <div>
+        <label htmlFor="name_sl" className="block font-medium mb-1">Validity</label>
+        <input
+          type="number"
+          id="val"
+          name="val"
+          required
+
+
+          placeholder="e.g. variant-small-1kg"
           className="w-full border rounded p-2"
         />
       </div>
 
-      <div>
-        <label htmlFor="qty" className="block font-medium mb-1">Quantity</label>
-        <input
-          type="number"
-          id="qty"
-          name="qty"
-          required
-          min="1"
-          className="w-full border rounded p-2"
-        />
-      </div>
+
+
+
 
       <div>
         <label htmlFor="status" className="block font-medium mb-1">Status</label>
@@ -147,13 +140,13 @@ const VarientForm = ({products}) => {
         />
       </div>
 
-      {/* <div>
+      <div>
         <label htmlFor="isDefault" className="block font-medium mb-1">Is Default</label>
         <select name="isDefault" id="isDefault" className="w-full border rounded p-2">
           <option value="false">No</option>
           <option value="true">Yes</option>
         </select>
-      </div> */}
+      </div>
 
       <button
         type="submit"

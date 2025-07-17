@@ -1,10 +1,10 @@
 "use client";
 import Image from "next/image";
-import { useRouter } from "next/navigation"; 
+import { useRouter } from "next/navigation";
 import React from "react";
 
 const ProductCard = ({ product }) => {
-  const router = useRouter(); 
+  const router = useRouter();
   const { name, description, thumbNail, varient, slug } = product;
 
   const discountedPrice =
@@ -16,7 +16,7 @@ const ProductCard = ({ product }) => {
 
   return (
     <div
-      onClick={handleClick} 
+      onClick={handleClick}
       className="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 w-full max-w-sm cursor-pointer"
     >
       <Image
@@ -30,6 +30,11 @@ const ProductCard = ({ product }) => {
       <div className="p-4">
         <h2 className="text-lg font-semibold text-gray-800">{name}</h2>
         <p className="text-sm text-gray-600 line-clamp-2">{description}</p>
+        <ul className="list-disc ml-6">
+          {product.pointsDescription.map((obj, idx) => (
+            <li key={idx}>{obj}</li>
+          ))}
+        </ul>
 
         <div className="mt-3 flex items-center justify-between">
           <div>

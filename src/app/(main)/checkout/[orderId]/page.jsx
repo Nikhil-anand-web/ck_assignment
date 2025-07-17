@@ -1,5 +1,7 @@
 import React from 'react'
-import CheckoutComp from '../_components/CheckoutComp'
+
+import CheckoutPayu from '../_components/CheckoutPayu';
+import CheckoutComp from '../_components/CheckoutComp';
 
 export const dynamic = 'force-dynamic';
 const page = async ({params}) => {
@@ -8,9 +10,9 @@ const page = async ({params}) => {
  
 
   return (
-
+   <CheckoutComp orderid={orderId}/>
     
-    <CheckoutComp orderid={orderId}/>
+    // <CheckoutPayu orderid={orderId}/>
   )
 }
 

@@ -64,7 +64,7 @@ if (!products) {
         },
     });
   
-console.log(count)
+console.log(products[0])
     return (
         <>
         <div style={{ display: "flex", width: "100%", flexWrap: "wrap", alignItems: "center", justifyContent: "center", gap: "20px", margin: "20px" }}>

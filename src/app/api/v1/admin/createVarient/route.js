@@ -6,42 +6,52 @@ import db from "@/utils/db";
 export async function POST(req) {
     const user = await getServerSession(authOptions);
     const reqObj = await req.json();
-    
+    console.log(reqObj)
 
 
     if (user) {
 
         try {
-         
-          const res = await db.varient.findFirst({
-            where:{
-                productId:reqObj.productId,
-                isDefault:true
-            }
-          })
+
+            const res = await db.varient.findFirst({
+                where: {
+                    productId: reqObj.productId,
+                    isDefault: true
+                }
+            })
 
 
             const newvarient = await db.varient.create({
                 data: {
-                    slug:reqObj.slug,
-                    weight:reqObj.weight,
-                    size:reqObj.size,
-                    qty:reqObj.qty,
-                    qty:reqObj.qty,
-                    discount:reqObj.discount,
-                    mrp:reqObj.mrp,
-                    isDefault:!res?true:false,
-                    status:reqObj.status===true?true:false,
-                    product:{
-                        connect:{
-                            id:reqObj.productId
+                    slug: reqObj.slug,
+                    discount: reqObj.discount,
+                    mrp: reqObj.mrp,
+                    isDefault: !res ? true : reqObj.isDefault,
+                    status: reqObj.status === true ? true : false,
+                    product: {
+                        connect: {
+                            id: reqObj.productId
                         }
 
                     },
-                    
+                    validity: res.validity,
+                    name: res.name
+
 
                 }
             })
+            if (reqObj.isDefault === true && res) {
+                console.log(await db.varient.update({
+                    where:{
+                        id:res.id
+
+                    },
+                    data: {
+                        isDefault: false
+                    }
+                }))
+
+            }
             return NextResponse.json({
                 success: true,
                 message: "success !!",

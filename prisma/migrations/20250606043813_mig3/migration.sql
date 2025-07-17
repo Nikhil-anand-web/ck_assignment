@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE `varient` ADD COLUMN `name` VARCHAR(191) NOT NULL DEFAULT 'Std';

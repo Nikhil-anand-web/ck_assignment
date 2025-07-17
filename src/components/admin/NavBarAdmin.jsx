@@ -19,6 +19,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { useSession, signOut } from "next-auth/react";
 import { useEffect, useState } from "react";
+import Image from "next/image";
 
 export default function NavBarAdmin() {
   const { data: session, status } = useSession();
@@ -63,13 +64,16 @@ export default function NavBarAdmin() {
               <Link href="/admin-panel/create-varient" className="block text-sm font-medium text-gray-700 hover:text-[#0da487]">
                 Create Variant
               </Link>
+              <Link href="/admin-panel/categories" className="block text-sm font-medium text-gray-700 hover:text-[#0da487]">
+                Categories
+              </Link>
             </div>
           </div>
         </SheetContent>
       </Sheet>
 
    
-      <div className="text-xl font-bold text-[#0da487]">MyApp</div>
+        <Image alt="logo" height="50" width="100" src={"https://www.elixirdigitalmedia.com/wp-content/uploads/2021/05/logo-1.png"}/>
 
      
       <DropdownMenu>

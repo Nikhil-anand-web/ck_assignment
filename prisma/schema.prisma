@@ -27,14 +27,11 @@ model category {
   id           String @id @default(uuid())
   categoryName String
   slug         String @unique
-
   status Int    @default(1)
-  image  String
-
+  image  String  @db.LongText
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   createdBy user     @relation(fields: [userId], references: [id])
-
   userId  String
   product product[]
 }
@@ -43,10 +40,11 @@ model product {
   id          String    @id @default(uuid())
   category    category  @relation(fields: [categoryId], references: [id], onDelete: Cascade) //
   categoryId  String
+  pointsDescription Json? 
   name        String
   description String    @db.LongText
   slug        String    @unique
-  thumbNail   String
+  thumbNail   String  @db.LongText
   images      Json?
   status      Boolean   @default(true)
   createdAt   DateTime  @default(now())
@@ -59,16 +57,17 @@ model product {
 model varient {
   id        String     @id @default(uuid())
   slug      String     @unique
-  weight    Decimal    @db.Decimal(10, 2)
-  size      String
-  qty       Int
+  name String @default("Std")
   status    Boolean    @default(true)
   discount  Decimal    @default(0) @db.Decimal(10, 2)
   mrp       Decimal    @db.Decimal(10, 2)
   isDefault Boolean    @default(false)
-  product   product    @relation(fields: [productId], references: [id])
+  product   product    @relation(fields: [productId], references: [id],onDelete: Cascade)
   cartItem  cartItem[]
   productId String
+  validity Int  @default(30)
+  createdAt   DateTime  @default(now())
+ 
 }
 
 model cart {
