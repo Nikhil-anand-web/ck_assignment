@@ -16,7 +16,7 @@ const CategoryModalGalary = async () => {
             image: true
         }
     })
-    console.log(categories)
+    
     return (
         <div>
             <div style={{ display: "flex", width: "100%", flexWrap: "wrap", alignItems: "center", justifyContent: "center", gap: "20px", margin: "20px" }}>

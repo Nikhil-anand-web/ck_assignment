@@ -7,13 +7,13 @@ export default function CategoryModalHome({ imageUrl, name, slug }) {
 
   const handleClick = () => {
     // Navigate to the product page
-    router.push(`/products/${slug}`);
+    router.push(`http://localhost:3000/products/${slug}`);
   };
-
+   const urli = process.env.NEXTAUTH_URL
   return (
     <div className="max-w-xs w-full group/card">
       <div
-        onClick={handleClick} // Add the click handler to the div
+        onClick={handleClick} 
         style={{ backgroundImage: `url(${imageUrl})` }}
         className={cn(
           "cursor-pointer overflow-hidden relative card h-96 rounded-md shadow-xl max-w-sm mx-auto bg-cover bg-center flex flex-col justify-between p-4"

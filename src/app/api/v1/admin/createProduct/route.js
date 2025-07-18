@@ -19,7 +19,7 @@ export async function POST(req) {
 
 
 
-    const filename = `${Date.now()}-${file.name}`;
+    const filename = `${Date.now()}-${file.name.replace(/\s+/g, '')}`;
     const absolutePath = path.join(process.cwd(), 'asset', 'uploads','products', slug, filename);
     await saveFileToPath(absolutePath, file);
 

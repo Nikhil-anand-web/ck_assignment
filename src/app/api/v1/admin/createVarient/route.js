@@ -34,8 +34,8 @@ export async function POST(req) {
                         }
 
                     },
-                    validity: res.validity,
-                    name: res.name
+                    validity: reqObj.validity,
+                    name: reqObj.name
 
 
                 }

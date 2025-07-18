@@ -18,7 +18,7 @@ console.log(formData,user)
         try {
             const file = formData.get("file");
             const slug = formData.get("slug")
-            const filename = `${Date.now()}-${file.name}`;
+            const filename = `${Date.now()}-${file.name.replace(/\s+/g, '')}`;
 
             const absolutePath = path.join(process.cwd(), 'asset', 'uploads','categoris', slug, filename);
             await saveFileToPath(absolutePath, file);

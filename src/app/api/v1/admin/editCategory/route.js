@@ -34,7 +34,7 @@ export async function POST(req) {
         };
 
         if (file && file.name) {
-            const filename = `${Date.now()}-${file.name}`;
+            const filename = `${Date.now()}-${file.name.replace(/\s+/g, '')}`;
             const absolutePath = path.join(process.cwd(), 'asset', 'uploads', 'categoris', slug, filename);
             await saveFileToPath(absolutePath, file);
             dataToUpdate.image = `/asset/uploads/categoris/${slug}/${filename}`;

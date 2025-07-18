@@ -36,7 +36,7 @@ export async function POST(req) {
 
         // If new file uploaded, overwrite thumbnail and save
         if (file && typeof file.name === 'string') {
-            const filename = `${Date.now()}-${file.name}`;
+            const filename = `${Date.now()}-${file.name.replace(/\s+/g, '')}`;
             const absolutePath = path.join(process.cwd(), 'asset', 'uploads', 'products', slug, filename);
             await saveFileToPath(absolutePath, file);
             thumbNail = `/asset/uploads/products/${slug}/${filename}`;
