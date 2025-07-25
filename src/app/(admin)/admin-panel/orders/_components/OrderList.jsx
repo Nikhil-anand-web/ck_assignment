@@ -6,8 +6,12 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
+
 
 export default function OrderList({ orders }) {
+    const rtr = useRouter()
   return (
     <div className="max-w-3xl mx-auto p-4">
       <h2 className="text-2xl font-bold mb-4"> Orders</h2>
@@ -18,6 +22,7 @@ export default function OrderList({ orders }) {
             <AccordionTrigger>
               <div className="flex flex-col text-left">
                 <span className="font-semibold">Order ID: {order.orderId}</span>
+                <span className="font-semibold">Customer Name: {order.CustomerMeta.fullName}</span>
                 <span className="text-sm text-muted-foreground">
                   Total: ₹{order.finalPrice} | TXN: {order.paymentToken.TXNID}
                 </span>
@@ -39,6 +44,7 @@ export default function OrderList({ orders }) {
                     <div className="text-right">
                       <p className="text-sm">MRP: ₹{item.varient.mrp}</p>
                       <p className="text-sm">Discount: {item.varient.discount}%</p>
+                      <Button onClick={()=> rtr.push(`orders/details/${order.orderId}`)}>Details</Button>
                     </div>
                   </li>
                 ))}
