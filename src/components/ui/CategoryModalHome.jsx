@@ -7,7 +7,7 @@ export default function CategoryModalHome({ imageUrl, name, slug }) {
 
   const handleClick = () => {
     // Navigate to the product page
-    router.push(`http://localhost:3000/products/${slug}`);
+    router.push(`/products/${slug}`);
   };
    const urli = process.env.NEXTAUTH_URL
   return (
